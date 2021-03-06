@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "96abd379-3427-4228-a02a-e96ee7be6528",
+		"name": "YeetYottza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/11/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pk\": 11,\r\n    \"first_name\": \"Andrew\",\r\n    \"last_name\": \"Haberlandt\",\r\n    \"email\": \"andrew@haberlandt.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}users/11/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/{{user_id_to_delete}}/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"{{user_id_to_delete}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Andrew\",\r\n    \"last_name\": \"Haberlandt\",\r\n    \"email\": \"Haberlandt.3@osu.edu\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}users/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "port",
+			"value": "8000"
+		},
+		{
+			"key": "baseurl",
+			"value": "http://localhost:{{port}}/"
+		},
+		{
+			"key": "g_washington_user_id_pk",
+			"value": "10"
+		},
+		{
+			"key": "user_id_to_delete",
+			"value": "1"
+		}
+	]
+}
