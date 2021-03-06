@@ -1,0 +1,1 @@
+# Republics, Monarchies, and Despotic States: A Comparison\nBaron de Montesquieu teaches a masterclass leading to the formation of the world's oldest democracy.\n### Notes:\n- Homeworks due every Friday, in French only. Grammar is graded. 
