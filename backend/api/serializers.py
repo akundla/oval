@@ -5,7 +5,7 @@ from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Pos
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['pk', 'first_name', 'last_name', 'email', 'password']
+        fields = ['pk', 'first_name', 'last_name', 'email']
         depth = 1
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -57,5 +57,9 @@ class AnswerSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
-        depth = 1
+        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+
+class UserCreationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'password']
