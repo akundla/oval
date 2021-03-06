@@ -1,5 +1,5 @@
 
-from .serializers import UserSerializer, RoleSerializer, PostSerializer
+from .serializers import UserSerializer, RoleSerializer, EnrolledSerializer, ClassSerializer, TermSerializer, TagSerializer, CommentSerializer, AnswerSerializer, PostSerializer
 from rest_framework import viewsets, mixins
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
 
@@ -11,6 +11,30 @@ class UserViewSet(viewsets.ModelViewSet):
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.all().order_by('name')
     serializer_class = RoleSerializer
+
+class EnrolledViewSet(viewsets.ModelViewSet):
+    queryset = Enrolled.objects.all().order_by('user_id')
+    serializer_class = EnrolledSerializer
+
+class ClassViewSet(viewsets.ModelViewSet):
+    queryset = Class.objects.all().order_by('name')
+    serializer_class = ClassSerializer
+
+class TermViewSet(viewsets.ModelViewSet):
+    queryset = Term.objects.all().order_by('code')
+    serializer_class = TermSerializer
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all().order_by('name')
+    serializer_class = TagSerializer
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all().order_by('created_date')
+    serializer_class = CommentSerializer
+
+class AnswerViewSet(viewsets.ModelViewSet):
+    queryset = Answer.objects.all().order_by('created_date')
+    serializer_class = AnswerSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('created_date')
