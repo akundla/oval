@@ -1,5 +1,5 @@
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, PostSerializer
 from rest_framework import viewsets, mixins
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
 
@@ -7,6 +7,10 @@ from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Pos
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('last_name')
     serializer_class = UserSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().order_by('created_date')
+    serializer_class = PostSerializer
 
 # Needed Routes
 # Sign Up
