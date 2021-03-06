@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:frontend/model/user.dart';
 
 import '../model/post.dart';
 import '../model/answer.dart';
@@ -23,11 +23,20 @@ class PostContentView extends StatelessWidget {
         (answer) => {
               retVal = Card(
                   child: ListTile(
-                      title: Text(answer.author.firstName +
-                          " " +
-                          answer.author.lastName),
+                      title: Text(answerTitle(answer)),
                       subtitle: Text(answer.bodyMarkdown)))
             });
     return retVal;
+  }
+
+  static String answerTitle(Answer answer) {
+    var author = answer.author;
+    var title = author.firstName + ' ' + author.lastName + "'s Answer";
+    if (author.isInstructor) {
+      title += ' (instructor) ';
+    } else {
+      title += ' (student) ';
+    }
+    return title + answer.upvotes.toString() + ' upvotes';
   }
 }
