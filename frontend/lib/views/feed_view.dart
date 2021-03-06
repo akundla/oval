@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+
+import '../model/post.dart';
 
 class FeedView extends StatefulWidget {
   @override
@@ -11,7 +16,7 @@ class _FeedState extends State<FeedView> {
   @override
   void initState() {
     super.initState();
-    posts = self.fetchPosts();
+    posts = fetchPosts();
   }
 
   @override
@@ -19,17 +24,18 @@ class _FeedState extends State<FeedView> {
     return Container();
   }
 
-  Future<http.Response> fetchAlbum() {
-    final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
+  Future<List<Post>> fetchPosts() async {
+    final response = await http.get(Uri.https(env['API_HOST'], 'posts'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return Album.fromJson(jsonDecode(response.body));
+      Iterable posts = jsonDecode(response.body);
+      return List<Post>.from(posts.map((post) => Post.fromJson(post)));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load post');
     }
   }
 }

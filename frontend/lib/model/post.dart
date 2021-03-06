@@ -1,15 +1,19 @@
+import 'user.dart';
+
 class Post {
+  final int id;
   final String title;
-  final Author author;
+  final User author;
   final String bodyMarkdown;
 
-  Post({this.userId, this.id, this.title});
+  Post({this.id, this.title, this.author, this.bodyMarkdown});
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      userId: json['userId'],
       id: json['id'],
       title: json['title'],
+      author: User.fromJson(json['author']),
+      bodyMarkdown: json['bodyMarkdown'],
     );
   }
 }
