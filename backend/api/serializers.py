@@ -5,14 +5,53 @@ from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Pos
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['pk', 'first_name', 'last_name', 'email', 'password']
+        depth = 1
 
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
-        fields = ['name']
+        fields = ['pk', 'name']
+        depth = 1
+
+class EnrolledSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enrolled
+        fields = ['pk', 'user_id', 'class_id', 'role', 'tag']
+        depth = 1
+
+class ClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Class
+        fields = ['pk', 'name', 'description', 'information_page', 'enrolles', 'primary_instructor']
+        depth = 1
+
+class TermSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Term
+        fields = ['pk', 'full_name', 'code']
+        depth = 1
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ['pk', 'name']
+        depth = 1
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author']
+        depth = 1
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author', 'comments']
+        depth = 1
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+        depth = 1

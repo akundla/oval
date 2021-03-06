@@ -6,6 +6,12 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'roles', views.RoleViewSet)
+router.register(r'enrolled', views.EnrolledViewSet)
+router.register(r'class', views.ClassViewSet)
+router.register(r'term', views.TermViewSet)
+router.register(r'tag', views.TagViewSet)
+router.register(r'comment', views.CommentViewSet)
+router.register(r'answer', views.AnswerViewSet)
 router.register(r'posts', views.PostViewSet)
 
 # Wire up our API using automatic URL routing.

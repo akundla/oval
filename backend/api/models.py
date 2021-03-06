@@ -1,10 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
+from .managers import CustomUserManager
 
-class User(models.Model):
-    first_name = models.CharField(max_length=255, )
+
+class User(AbstractUser):
+    username = None
+    first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    email = models.EmailField()
-    
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    objects = CustomUserManager()
+
 class Role(models.Model):
     name = models.CharField(max_length=255)
 
@@ -27,7 +38,6 @@ class Term(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255)
-
 
 class Comment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)

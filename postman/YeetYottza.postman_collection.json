@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "96abd379-3427-4228-a02a-e96ee7be6528",
+		"name": "YeetYottza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ListUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/11/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pk\": 11,\r\n    \"first_name\": \"Andrew\",\r\n    \"last_name\": \"Haberlandt\",\r\n    \"email\": \"andrew@haberlandt.com\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}users/11/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}users/11/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						"11",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"Baron\",\r\n    \"last_name\": \"Montesquieu\",\r\n    \"email\": \"montesquieu@lemail.com\",\r\n    \"password\": \"TheSpiritOfTheLaw\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}users/",
+					"host": [
+						"{{baseurl}}users"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateClass",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Republics, Monarchies, and Despotic States: A Comparison\",\r\n    \"description\": \"An exploration on the nature and aims of the three broad historical classes of governments\",\r\n    \"information_page\": \"{{montesquieu_info_page}}\",\r\n    \"primary_instructor_id\": 14\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}class/",
+					"host": [
+						"{{baseurl}}class"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRole",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Primary Instructor\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}roles/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListRoles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}roles/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRole",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}roles/4/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "port",
+			"value": "8000"
+		},
+		{
+			"key": "baseurl",
+			"value": "http://localhost:{{port}}/"
+		},
+		{
+			"key": "g_washington_user_id_pk",
+			"value": "10"
+		},
+		{
+			"key": "user_id_to_delete",
+			"value": "1"
+		},
+		{
+			"key": "montesquieu_info_page",
+			"value": "# Republics, Monarchies, and Despotic States: A Comparison\\nBaron de Montesquieu teaches a masterclass leading to the formation of the world's oldest democracy.\\n### Notes:\\n- Homeworks due every Friday, in French only. Grammar is graded. "
+		},
+		{
+			"key": "montesquieu_user_id",
+			"value": "14"
+		}
+	]
+}
