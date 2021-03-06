@@ -1,12 +1,8 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/views/post_content_view.dart';
-import 'package:http/http.dart' as http;
 
 import '../model/post.dart';
-import '../model/user.dart';
 
 import 'package:dartz/dartz.dart' show Either, Left;
 
