@@ -28,7 +28,6 @@ class Term(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
-
 class Comment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
