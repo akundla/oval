@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "GetUsers",
+			"name": "ListUsers",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -92,12 +92,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseurl}}users/{{user_id_to_delete}}/",
+					"raw": "{{baseurl}}users/11/",
 					"host": [
 						"{{baseurl}}users"
 					],
 					"path": [
-						"{{user_id_to_delete}}",
+						"11",
 						""
 					]
 				}
@@ -105,7 +105,7 @@
 			"response": []
 		},
 		{
-			"name": "PostUser",
+			"name": "CreateUser",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -117,7 +117,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"Andrew\",\r\n    \"last_name\": \"Haberlandt\",\r\n    \"email\": \"Haberlandt.3@osu.edu\"\r\n}"
+					"raw": "{\r\n    \"first_name\": \"Baron\",\r\n    \"last_name\": \"Montesquieu\",\r\n    \"email\": \"montesquieu@lemail.com\",\r\n    \"password\": \"TheSpiritOfTheLaw\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}users/",
