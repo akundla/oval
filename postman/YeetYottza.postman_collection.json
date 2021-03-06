@@ -130,6 +130,80 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "CreateRole",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Primary Instructor\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}roles/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListRoles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}roles/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRole",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}roles/4/",
+					"host": [
+						"{{baseurl}}roles"
+					],
+					"path": [
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
