@@ -1,29 +1,20 @@
 # yeetyottza
 
-Free classroom-oriented instructor-moderated question and answer forum. Based on and improving upon Piazza. 
+Free classroom-oriented instructor-moderated question and answer forum. Inspired by [Piazza](https://piazza.com/).
 
 ## Setting up the app
 
-1. Install dependencies: `sudo apt install build-essential postgresql libpq-dev python3 python3-pip`
-1. Set up back end
-    1. Navigate to the back end directory
-    1. Install the dependencies in the Django project: `pip3 install -r requirements.txt`
-    1. Set up the environment variables file
-        1. Copy .env.local.example and rename it to .env.local
-        1. Populate the "SECRET_KEY"
-    1. Run Django migrations: `python3 manage.py migrate`
-    1. Scrape listings: `python3 manage.py scrape`
+1. Install dependencies
+    * PostgreSQL, Python3, pip: `sudo apt install build-essential postgresql libpq-dev python3 python3-pip`
+    * [Flutter](https://flutter.dev/docs/get-started/install)
 1. Set up database
     1. Start the Postgres service: `sudo service postgresql start`
     1. Change the password of the postgres user
         1. Open psql: `sudo -u postgres psql`
         1. Change the password: `\password postgres`
+            * Remember this, you'll need it later!
         1. Quit psql: `\q`
-    1. Update the password of the postgres user in the backend .env file
-        1. Navigate to the backend directory
-        1. Open the .env file
-        1. Change the "POSTGRES_PASSWORD" to the password you set above
-    1. Create the Off Campus database: `sudo -u postgres createdb plaza`
+    1. Create the YeetYottza database: `sudo -u postgres createdb yeetyottza`
     1. Change Postgres's authentication mode
         1. Find the configuration file: `sudo -u postgres psql -c "show hba_file;"`
         1. Open the configuration file: `sudo vim [configuration file path]`
@@ -34,3 +25,21 @@ Free classroom-oriented instructor-moderated question and answer forum. Based on
             # IPv6 local connections:
             host    all             all             ::1/128                 md5
             ```
+1. Set up back end
+    1. Navigate to the back end directory
+    1. Install the dependencies in the Django project: `pip3 install -r requirements.txt`
+    1. Set up the environment variables file
+        1. Copy .env.example and rename it to .env
+        1. Populate the fields in the file
+    1. Run Django migrations: `python3 manage.py migrate`
+1. Set up front end
+    1. Navigate to the front end directory
+    1. Install the dependencies in the Flutter project: `flutter pub get`
+    1. Set up the environment variables file
+        1. Copy .env.example and rename it to .env
+        1. Populate the fields in the file
+
+## Running the app
+
+1. Run back end: `python3 manage.py runserver`
+1. Run front end: `flutter run`
