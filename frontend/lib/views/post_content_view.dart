@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/model/user.dart';
 
 import '../model/post.dart';
 import '../model/answer.dart';

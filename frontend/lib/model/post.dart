@@ -8,9 +8,11 @@ class Post {
   final String title;
   final User author;
   final String bodyMarkdown;
+  final DateTime created;
+  bool unread;
   List<Answer> answers;
 
-  Post({this.id, this.title, this.author, this.bodyMarkdown, List<Answer> answers=null}) {
+  Post({this.id, this.title, this.author, this.bodyMarkdown, this.created, this.unread, List<Answer> answers=null}) {
     this.answers = answers == null ? [] : answers;
     this.answers.sort();
   }
@@ -21,6 +23,8 @@ class Post {
       title: json['title'],
       author: User.fromJson(json['author']),
       bodyMarkdown: json['bodyMarkdown'],
+      created: DateTime.parse(json['created']),
+      unread: json['unread'],
       answers: getAnswers(json['answers'])
     );
   }

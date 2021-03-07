@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/model/answer.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import '../model/post.dart';
 import '../model/user.dart';
@@ -33,11 +34,21 @@ class _FeedState extends State<FeedView> {
         return Card(
             child: ListTile(
                 title: Text('${posts[index].title}'),
-                subtitle: Text('${posts[index].bodyMarkdown}', maxLines: 1),
+                subtitle: Text('${posts[index].bodyMarkdown}', maxLines: 3),
+                trailing: Column(children: [
+                  Text(DateFormat.jm().format(posts[index].created).toString()),
+                  SizedBox(height: 8),
+                  posts[index].unread ? Icon(Icons.circle, color: Colors.blue, size: 16, semanticLabel: 'Unread') : SizedBox.shrink(),
+                ],),
                 onTap: () {
                   currentlyViewing = posts[index];
                   if (MediaQuery.of(context).size.width > MOBILE_BREAKPOINT) {
-                    setState(() {});
+                      setState(() {
+                        if (currentlyViewing.unread) {
+                          // TODO: mark post as read via API
+                            currentlyViewing.unread = false;
+                        }
+                      });
                   } else {
                     Navigator.push(
                       context,
@@ -129,13 +140,17 @@ class _FeedState extends State<FeedView> {
           id: 0,
           title: "Note Test",
           bodyMarkdown:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          created: DateTime.parse('2021-03-06 20:25:00.346'),
+          unread: true),
       Post(
           author: andrew,
           id: 1,
           title: "Question Test",
           bodyMarkdown:
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          created: DateTime.parse('2021-03-06 20:25:00.346'),
+          unread: false,
           answers: [
             Answer(
                 id: 0,
@@ -155,6 +170,8 @@ class _FeedState extends State<FeedView> {
           title: "Question Test 2",
           bodyMarkdown:
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          created: DateTime.parse('2021-03-06 20:25:00.346'),
+          unread: true,
           answers: [
             Answer(
                 id: 3,

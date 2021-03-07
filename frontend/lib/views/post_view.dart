@@ -23,7 +23,7 @@ class _PostState extends State<PostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: widget.has_nav_bar ? AppBar(title: Text('Question')) : null,
+        appBar: widget.has_nav_bar ? AppBar(title: Text('Question ' + widget.post.id.toString())) : null,
         body: createContent(context));
   }
 
