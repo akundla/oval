@@ -20,8 +20,8 @@ class Role(models.Model):
     name = models.CharField(max_length=255)
 
 class Enrolled(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    class_id = models.ForeignKey("Class", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    enrolled_class = models.ForeignKey("Class", on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     tag = models.CharField(max_length=255)
 

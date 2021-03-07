@@ -18,7 +18,7 @@ class RoleViewSet(viewsets.ModelViewSet):
     serializer_class = RoleSerializer
 
 class EnrolledViewSet(viewsets.ModelViewSet):
-    queryset = Enrolled.objects.all().order_by('user_id')
+    queryset = Enrolled.objects.all().order_by('tag')
     serializer_class = EnrolledSerializer
 
 class ClassViewSet(viewsets.ModelViewSet):

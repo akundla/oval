@@ -15,7 +15,7 @@ class RoleSerializer(serializers.ModelSerializer):
 class EnrolledSerializer(serializers.ModelSerializer):
     class Meta:
         model = Enrolled
-        fields = ['pk', 'user_id', 'class_id', 'role', 'tag']
+        fields = ['pk', 'user', 'enrolled_class', 'role', 'tag']
 
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
