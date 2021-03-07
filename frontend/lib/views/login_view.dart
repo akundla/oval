@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/post_content_view.dart';
 
-import '../model/post.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
