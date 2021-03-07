@@ -458,6 +458,39 @@
 			"response": []
 		},
 		{
+			"name": "UpdatePost",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane? Edit: Is he merely in the pay of the Spanish?\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}posts/6/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CreatePost",
 			"request": {
 				"method": "POST",
