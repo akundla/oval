@@ -116,13 +116,7 @@ class _FeedState extends State<FeedView> {
           <String, String>{'state': true.toString()}),
     );
 
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(jsonDecode(response.toString()).toString());
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
+    if (response.statusCode != 200) {
       throw Exception('Failed to mark post viewed');
     }
   }
