@@ -29,7 +29,7 @@ class Class(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     information_page = models.TextField()
-    enrolles = models.ManyToManyField(User, through=Enrolled, related_name="classes_enrolled")
+    enrollees = models.ManyToManyField(User, through=Enrolled, related_name="classes_enrolled")
     primary_instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="primary_instructor_in_class", default = 1)
 
 class Term(models.Model):
@@ -61,6 +61,8 @@ class Post(models.Model):
     body = models.TextField()
     answerable = models.BooleanField()
     tags = models.ManyToManyField(Tag, blank=True)
+    class_in = models.ForeignKey(Class, on_delete=models.CASCADE)
+    views = models.ManyToManyField(User, blank=True, related_name="posts_visited")
     upvotes = models.ManyToManyField(User, related_name="posts_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts_authored")
     comments = models.ManyToManyField(Comment, blank=True)

@@ -33,7 +33,7 @@ class EnrolledSerializer(serializers.ModelSerializer):
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = Class
-        fields = ('pk', 'name', 'description', 'information_page', 'enrolles', 'primary_instructor')
+        fields = ('pk', 'name', 'description', 'information_page', 'enrollees', 'primary_instructor')
 
     def to_representation(self, instance):
         self.fields['primary_instructor'] = UserSerializer(read_only=True)
@@ -62,10 +62,11 @@ class AnswerSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers', 'class_in', 'views']
     
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
+        self.fields['class_in'] = ClassSerializer(read_only=True)
         return super(PostSerializer, self).to_representation(instance)
 
 class UserCreationSerializer(serializers.ModelSerializer):
