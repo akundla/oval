@@ -13,7 +13,7 @@ router.register(r'term', views.TermViewSet)
 router.register(r'tag', views.TagViewSet)
 router.register(r'comment', views.CommentViewSet)
 router.register(r'answer', views.AnswerViewSet)
-router.register(r'posts', views.PostViewSet)
+router.register(r'posts', views.PostViewSet, basename="Posts")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -1,12 +1,16 @@
 
 from .serializers import UserSerializer, RoleSerializer, EnrolledSerializer, ClassSerializer, TermSerializer, TagSerializer, CommentSerializer, AnswerSerializer, PostSerializer
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, generics
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
+from .permissions import *
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.http import HttpResponse, JsonResponse
+from rest_framework.exceptions import ValidationError
+
 
 # User Routes
 class UserViewSet(viewsets.ModelViewSet):
@@ -42,10 +46,28 @@ class AnswerViewSet(viewsets.ModelViewSet):
     serializer_class = AnswerSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
-
-    queryset = Post.objects.all().order_by('created_date')
+    #permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        class_in = self.request.query_params.get("class_in", None)
+        if class_in is not None:
+            #raise ValidationError(detail="class_in pk is a required parameter on this request.")
+            current_class = Class.objects.get(pk=class_in)
+        
+
+            if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
+                raise ValidationError(detail="The signed in user does not have access to this class.")
+
+            queryset = Post.objects.filter(class_in=current_class.pk).order_by('created_date')
+        else:
+            queryset = Post.objects.all().order_by('created_date')
+
+        return queryset
+
+# Filters
+# Paginated results per class
+#
 
 # class CreateUserViewSet(APIView):
     
