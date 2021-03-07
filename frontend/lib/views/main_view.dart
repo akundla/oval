@@ -5,6 +5,8 @@ import 'package:frontend/views/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainView extends StatefulWidget {
+  MainView(this.force_signout);
+  bool force_signout;
   @override
   _MainViewState createState() => _MainViewState();
 }
@@ -19,7 +21,8 @@ class _MainViewState extends State<MainView> {
   }
 
   void getToken() async {
-    if (preferences == null) preferences = await SharedPreferences.getInstance();
+    if (preferences == null)
+      preferences = await SharedPreferences.getInstance();
     if (preferences.containsKey('token')) {
       setState(() {
         authToken.value = preferences.getString('token');
@@ -33,6 +36,11 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.force_signout && authToken.value != null) {
+      authToken.value = null;
+      preferences.remove('token');
+      widget.force_signout = false;
+    }
     return authToken.value != null
         ? FeedView()
         : LoginPage((token) {

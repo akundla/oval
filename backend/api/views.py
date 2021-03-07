@@ -82,9 +82,9 @@ class PostViewSet(viewsets.ModelViewSet):
             if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
                 raise ValidationError(detail="The signed in user does not have access to this class.")
 
-            queryset = Post.objects.filter(class_in=current_class.pk).order_by('created_date')
+            queryset = Post.objects.filter(class_in=current_class.pk).order_by('-created_date', reversed=True)
         else:
-            queryset = Post.objects.all().order_by('created_date')
+            queryset = Post.objects.all().order_by('-created_date')
 
         return queryset
 
@@ -104,6 +104,24 @@ class PostViewSet(viewsets.ModelViewSet):
                 post.save()
                 upvoted = False
             return Response({'upvoted': upvoted})
+        else:
+            raise ValidationError(detail="Bad request.")
+    
+    @action(detail=True, methods=['post'])
+    def view(self, request, pk=None):
+        post = self.get_object()
+        current_class = post.class_in
+
+        if 'state' in request.data:
+            if request.data['state']:
+                    post.views.add(self.request.user)
+                    post.save()
+                    viewed = True
+            elif not request.data['state']:
+                post.views.remove(self.request.user)
+                post.save()
+                viewed = False
+            return Response({'viewed': viewed})
         else:
             raise ValidationError(detail="Bad request.")
 
