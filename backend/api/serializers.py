@@ -72,7 +72,7 @@ class CurrentUserAction(serializers.Serializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'author', 'comments', 'class_in', 'upvote_count', 'user_upvoted', 'user_viewed']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'author', 'comments', 'class_in', 'upvote_count', 'user_upvoted', 'user_viewed', 'answers_post']
     
     user_upvoted = CurrentUserAction(read_only=True, source='upvotes')
     user_viewed = CurrentUserAction(read_only=True, source='views')
