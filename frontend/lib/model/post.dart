@@ -3,9 +3,9 @@ import 'user.dart';
 
 class Post {
   final int id;
-  final String title;
+  String title;
   final User author;
-  final String bodyMarkdown;
+  String bodyMarkdown;
   final DateTime created;
   final bool answerable;
   bool unread;

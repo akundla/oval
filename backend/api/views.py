@@ -1,5 +1,5 @@
 
-from .serializers import UserSerializer, RoleSerializer, EnrolledSerializer, ClassSerializer, TermSerializer, TagSerializer, CommentSerializer, AnswerSerializer, PostSerializer
+from .serializers import *
 from rest_framework import viewsets, mixins, generics
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
 from .permissions import *
@@ -124,6 +124,23 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response({'viewed': viewed})
         else:
             raise ValidationError(detail="Bad request.")
+
+    def create(self, request):
+        ps = QuickPostSerializer(data=request.data)
+        if ps.is_valid() and self.request.user is not None:
+            p = Post()
+            p.title = ps['title'].value
+            p.body = ps['body'].value
+            p.answerable = True
+            p.class_in = Class.objects.get(pk=5)
+            p.author = self.request.user
+            p.save()
+            return Response(PostSerializer(context={'request': request}).to_representation(p))
+        # if ('body' in request.data and 'title' in request.data):
+        #     p = Post()
+        #     p.title = request.data['title']
+
+        raise ValidationError(detail="Bad request.")
 
 # Filters
 # Paginated results per class

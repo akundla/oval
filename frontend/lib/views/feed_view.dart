@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/singletons/auth_token.dart';
+import 'package:frontend/views/post_edit.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -34,14 +35,12 @@ class _FeedState extends State<FeedView> {
         return Card(
             child: ListTile(
                 leading: posts[index].answerable
-                          ? Icon(Icons.question_answer_outlined,
-                              color: Colors.black,
-                              size: 32,
-                              semanticLabel: 'Question')
-                          : Icon(Icons.note_outlined,
-                              color: Colors.black,
-                              size: 32,
-                              semanticLabel: 'Note'),
+                    ? Icon(Icons.question_answer_outlined,
+                        color: Colors.black,
+                        size: 32,
+                        semanticLabel: 'Question')
+                    : Icon(Icons.note_outlined,
+                        color: Colors.black, size: 32, semanticLabel: 'Note'),
                 title: Text('${posts[index].title}'),
                 subtitle: Text('${posts[index].bodyMarkdown}', maxLines: 3),
                 trailing: Column(
@@ -86,7 +85,17 @@ class _FeedState extends State<FeedView> {
         isLargeScreen = false;
       }
       return Row(children: [
-        Expanded(flex: 3, child: lvb),
+        Expanded(
+            flex: 3,
+            child: new Column(children: [
+              MaterialButton(
+                child: Text("Add Post"),
+                onPressed: () {
+                  makeNewPost();
+                },
+              ),
+              Expanded(child: lvb)
+            ])),
         isLargeScreen
             ? Expanded(
                 flex: 7,
@@ -120,9 +129,9 @@ class _FeedState extends State<FeedView> {
       Uri.http(env['API_HOST'], 'posts/' + post.id.toString() + '/view/'),
       headers: {
         HttpHeaders.authorizationHeader: "Token " + authToken.value,
-        HttpHeaders.contentTypeHeader: "application/json"},
-      body: jsonEncode(
-          <String, String>{'state': true.toString()}),
+        HttpHeaders.contentTypeHeader: "application/json"
+      },
+      body: jsonEncode(<String, String>{'state': true.toString()}),
     );
 
     if (response.statusCode != 200) {
@@ -135,9 +144,9 @@ class _FeedState extends State<FeedView> {
       Uri.http(env['API_HOST'], 'posts/' + post.id.toString() + '/upvote/'),
       headers: {
         HttpHeaders.authorizationHeader: "Token " + authToken.value,
-        HttpHeaders.contentTypeHeader: "application/json"},
-      body: jsonEncode(
-          <String, String>{'state': true.toString()}),
+        HttpHeaders.contentTypeHeader: "application/json"
+      },
+      body: jsonEncode(<String, String>{'state': true.toString()}),
     );
 
     if (response.statusCode == 200) {
@@ -150,7 +159,19 @@ class _FeedState extends State<FeedView> {
       throw Exception('Failed to mark post viewed');
     }
   }
-  
+
+  void makeNewPost() async {
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => new PostEditView(null),
+        )).then((value) {
+      setState(() {
+        posts = fetchPosts();
+      });
+    });
+  }
+
   Future<List<Post>> fetchPosts() async {
     final response = await http.get(
       Uri.http(env['API_HOST'], 'posts'),
