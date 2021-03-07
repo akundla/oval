@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -59,13 +58,31 @@ class AnswerSerializer(serializers.ModelSerializer):
         model = Answer
         fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author', 'comments', 'post']
 
+class CurrentUserAction(serializers.Serializer):
+    def to_representation(self, upvotes):
+        user = None
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+        
+        if user is not None:
+            return user.id in upvotes.all()
+        return str("hi")
+
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'class_in', 'views']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'author', 'comments', 'class_in', 'upvote_count', 'user_upvoted', 'user_viewed']
     
+    user_upvoted = CurrentUserAction(read_only=True, source='upvotes')
+    user_viewed = CurrentUserAction(read_only=True, source='views')
+    upvote_count = serializers.IntegerField(
+        source='upvotes.count', 
+        read_only=True
+    )
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
         self.fields['class_in'] = ClassSerializer(read_only=True)
+        
         return super(PostSerializer, self).to_representation(instance)
 
