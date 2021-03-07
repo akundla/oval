@@ -10,9 +10,9 @@ class Answer implements Comparable {
 
   factory Answer.fromJson(Map<String, dynamic> json) {
     return Answer(
-      id: json['id'],
+      id: json['pk'],
       author: User.fromJson(json['author']),
-      bodyMarkdown: json['bodyMarkdown'],
+      bodyMarkdown: json['body'],
       upvotes: json['upvotes'],
     );
   }

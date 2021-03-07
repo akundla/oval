@@ -19,11 +19,11 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      id: json['id'],
+      id: json['pk'],
       title: json['title'],
       author: User.fromJson(json['author']),
       bodyMarkdown: json['bodyMarkdown'],
-      created: DateTime.parse(json['created']),
+      created: DateTime.parse(json['created_date']),
       unread: json['unread'],
       answers: getAnswers(json['answers'])
     );
