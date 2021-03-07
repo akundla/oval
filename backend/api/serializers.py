@@ -62,7 +62,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers', 'class_in', 'views']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers', 'class_in', 'views']
     
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
