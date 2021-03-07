@@ -76,10 +76,15 @@ class PostViewSet(viewsets.ModelViewSet):
         # if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
         #         raise ValidationError(detail="You cannot upvote this post.")
         if 'state' in request.data:
-            if request.data['state']:
-                post.upvotes.add(self.request.user)
+            if request.data['state'] and self.request.user not in post.upvotes.all():
+                    post.upvotes.add(self.request.user)
+                    post.save()
+                    upvoted = True
+            elif not request.data['state'] and self.request.user in post.upvotes.all():
+                post.upvotes.remove(self.request.user)
                 post.save()
-            return Response({'upvoted': request.data['state']})
+                upvoted = False
+            return Response({'upvoted': upvoted})
         else:
             raise ValidationError(detail="Bad request.")
 

@@ -66,7 +66,7 @@ class CurrentUserAction(serializers.Serializer):
             user = request.user
         
         if user is not None:
-            return user.id in upvotes.all()
+            return user in upvotes.all()
         return str("hi")
 
 class PostSerializer(serializers.ModelSerializer):
