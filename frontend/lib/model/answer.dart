@@ -4,16 +4,18 @@ class Answer implements Comparable {
   final int id;
   final User author;
   final String bodyMarkdown;
-  final int upvotes;
+  bool upvoted;
+  int upvotes;
 
-  Answer({this.id, this.author, this.bodyMarkdown, this.upvotes=0});
+  Answer({this.id, this.author, this.bodyMarkdown, this.upvoted, this.upvotes});
 
   factory Answer.fromJson(Map<String, dynamic> json) {
     return Answer(
       id: json['pk'],
       author: User.fromJson(json['author']),
       bodyMarkdown: json['body'],
-      upvotes: json['upvotes'],
+      upvoted: json['user_upvoted'],
+      upvotes: json['upvote_count'],
     );
   }
 

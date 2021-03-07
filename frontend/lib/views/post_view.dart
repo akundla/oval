@@ -6,9 +6,9 @@ import '../model/post.dart';
 import 'package:dartz/dartz.dart' show Left, Right;
 
 class PostView extends StatefulWidget {
-  PostView(this.post, this.has_nav_bar);
+  PostView(this.post, this.hasNavBar);
   final Post post;
-  final bool has_nav_bar;
+  final bool hasNavBar;
 
   @override
   _PostState createState() => _PostState();
@@ -23,7 +23,7 @@ class _PostState extends State<PostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: widget.has_nav_bar ? AppBar(title: Text('Question ' + widget.post.id.toString())) : null,
+        appBar: widget.hasNavBar ? AppBar(title: Text('Question ' + widget.post.id.toString())) : null,
         body: createContent(context));
   }
 

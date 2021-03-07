@@ -36,7 +36,7 @@ class Post {
       unread: !json['user_viewed'],
       upvoted: json['user_upvoted'],
       upvotes: json['upvote_count'],
-      // answers: getAnswers(json['answers_post'])
+      answers: getAnswers(json['answers_post'])
     );
   }
 

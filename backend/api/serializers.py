@@ -53,11 +53,6 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author']
 
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answer
-        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author', 'comments', 'post']
-
 class CurrentUserAction(serializers.Serializer):
     def to_representation(self, upvotes):
         user = None
@@ -68,6 +63,18 @@ class CurrentUserAction(serializers.Serializer):
         if user is not None:
             return user in upvotes.all()
         return str("hi")
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvote_count', 'user_upvoted', 'author', 'comments', 'post']
+
+    author = UserSerializer(read_only=True)
+    upvote_count = serializers.IntegerField(
+        source='upvotes.count', 
+        read_only=True
+    )
+    user_upvoted = CurrentUserAction(read_only=True, source='upvotes')
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
