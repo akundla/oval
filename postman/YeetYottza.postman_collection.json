@@ -227,6 +227,40 @@
 			"response": []
 		},
 		{
+			"name": "ViewPost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}posts/6/view/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"6",
+						"view",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "UpdateClass",
 			"request": {
 				"method": "POST",
@@ -559,7 +593,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"adambricelis@gmail.com\",\r\n    \"password\": \"ILoveAndriana\"\r\n}"
+					"raw": "{\r\n    \"username\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}api-token-auth/",
@@ -621,7 +655,7 @@
 		},
 		{
 			"key": "auth_token",
-			"value": "Token a6d202425d76234323fd716c1e5f99826e605536"
+			"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9"
 		}
 	]
 }
