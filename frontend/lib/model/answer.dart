@@ -12,7 +12,7 @@ class Answer implements Comparable {
   factory Answer.fromJson(Map<String, dynamic> json) {
     return Answer(
       id: json['pk'],
-      author: User.fromJson(json['author']),
+      author: User.fromJson(json['author_info']),
       bodyMarkdown: json['body'],
       upvoted: json['user_upvoted'],
       upvotes: json['upvote_count'],
