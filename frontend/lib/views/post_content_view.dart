@@ -5,9 +5,12 @@ import '../model/answer.dart';
 
 import 'package:dartz/dartz.dart';
 
+typedef UpvoteFunc = void Function(Post p);
+
 class PostContentView extends StatelessWidget {
-  PostContentView(this.content);
+  PostContentView(this.content, this.upvote);
   final Either<Post, Answer> content;
+  final UpvoteFunc upvote;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +33,36 @@ class PostContentView extends StatelessWidget {
             },
         (answer) => {
               retVal = Card(
-                  child: ListTile(
-                      leading: Icon(Icons.star_outline,
-                          color: Colors.black,
-                          size: 32,
-                          semanticLabel: 'Answer'),
-                      title: Text(answerTitle(answer)),
-                      subtitle: Text(answer.bodyMarkdown)))
+                  child: Column(children: [
+                ListTile(
+                    leading: Icon(Icons.star_outline,
+                        color: Colors.black, size: 32, semanticLabel: 'Answer'),
+                    title: Text(answerTitle(answer)),
+                    subtitle: Text(answer.bodyMarkdown)),
+                Container(
+                    width: 100,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.arrow_upward_outlined,
+                                color: Colors.black,
+                                size: 32,
+                                semanticLabel: 'Upvote'),
+                            Text('Upvote')
+                          ],
+                        )))
+              ]))
             });
     return retVal;
   }
 
   static String answerTitle(Answer answer) {
-    return answer.author.firstName + ' ' + answer.author.lastName + "'s Answer has " + answer.upvotes.toString() + ' upvotes';
+    return answer.author.firstName +
+        ' ' +
+        answer.author.lastName +
+        "'s Answer has " +
+        answer.upvotes.toString() +
+        ' upvotes';
   }
 }

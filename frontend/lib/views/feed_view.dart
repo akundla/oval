@@ -139,27 +139,6 @@ class _FeedState extends State<FeedView> {
     }
   }
 
-  void upvote(Post post) async {
-    final response = await http.post(
-      Uri.http(env['API_HOST'], 'posts/' + post.id.toString() + '/upvote/'),
-      headers: {
-        HttpHeaders.authorizationHeader: "Token " + authToken.value,
-        HttpHeaders.contentTypeHeader: "application/json"
-      },
-      body: jsonEncode(<String, String>{'state': true.toString()}),
-    );
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(jsonDecode(response.toString()).toString());
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to mark post viewed');
-    }
-  }
-
   void makeNewPost() async {
     await Navigator.push(
         context,
