@@ -8,6 +8,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 from django.http import HttpResponse, JsonResponse
 from rest_framework.exceptions import ValidationError
 
@@ -48,6 +49,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     #permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         class_in = self.request.query_params.get("class_in", None)
@@ -67,15 +69,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
 # Filters
 # Paginated results per class
-#
-
-# class CreateUserViewSet(APIView):
-    
-#     def post(self, request, format)
 
 # Needed Routes
-# Sign Up
-# Login
 
 # View User
 # Edit User
