@@ -50,3 +50,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+    
+    def to_representation(self, instance):
+        self.fields['author'] = UserSerializer(read_only=True)
+        return super(PostSerializer, self).to_representation(instance)
