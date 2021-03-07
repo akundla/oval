@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/views/post_content_view.dart';
 
 import '../model/post.dart';
+import '../model/answer.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
@@ -39,28 +41,32 @@ class _PostState extends State<PostView> {
       itemCount: 1 + widget.post.answers.length,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return PostContentView(Left(widget.post), upvote);
+          return PostContentView(Left(widget.post), upvotePost);
         } else {
-          return PostContentView(Right(widget.post.answers[index - 1]), upvote);
+          return PostContentView(
+              Right(widget.post.answers[index - 1]), upvotePost);
         }
       },
     );
   }
 
-  void upvote(Post post) async {
+  void upvotePost(dynamic post) async {
+    final type = post.runtimeType == Post ? 'posts' : 'answer';
     final response = await http.post(
-      Uri.http(env['API_HOST'], 'posts/' + post.id.toString() + '/upvote/'),
+      Uri.http(env['API_HOST'], '$type/' + post.id.toString() + '/upvote/'),
       headers: {
         HttpHeaders.authorizationHeader: "Token " + authToken.value,
         HttpHeaders.contentTypeHeader: "application/json"
       },
-      body: jsonEncode(<String, String>{'state': true.toString()}),
+      body: jsonEncode(<String, dynamic>{'state': !post.upvoted}),
     );
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      print(jsonDecode(response.toString()).toString());
+      setState(() {
+        post.upvoted = jsonDecode(response.body)['upvoted'];
+      });
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.

@@ -5,7 +5,7 @@ import '../model/answer.dart';
 
 import 'package:dartz/dartz.dart';
 
-typedef UpvoteFunc = void Function(Post p);
+typedef UpvoteFunc = void Function(dynamic p);
 
 class PostContentView extends StatelessWidget {
   PostContentView(this.content, this.upvote);
@@ -18,41 +18,67 @@ class PostContentView extends StatelessWidget {
     content.fold(
         (post) => {
               retVal = Card(
-                  child: ListTile(
-                      leading: post.answerable
-                          ? Icon(Icons.question_answer_outlined,
-                              color: Colors.black,
-                              size: 32,
-                              semanticLabel: 'Question')
-                          : Icon(Icons.note_outlined,
-                              color: Colors.black,
-                              size: 32,
-                              semanticLabel: 'Note'),
-                      title: Text(post.title),
-                      subtitle: Text(post.bodyMarkdown)))
-            },
-        (answer) => {
-              retVal = Card(
                   child: Column(children: [
                 ListTile(
-                    leading: Icon(Icons.star_outline,
-                        color: Colors.black, size: 32, semanticLabel: 'Answer'),
-                    title: Text(answerTitle(answer)),
-                    subtitle: Text(answer.bodyMarkdown)),
+                    leading: post.answerable
+                        ? Icon(Icons.question_answer_outlined,
+                            color: Colors.black,
+                            size: 32,
+                            semanticLabel: 'Question')
+                        : Icon(Icons.note_outlined,
+                            color: Colors.black,
+                            size: 32,
+                            semanticLabel: 'Note'),
+                    title: Text(post.title),
+                    subtitle: Text(post.bodyMarkdown)),
                 Container(
                     width: 100,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          upvote(post);
+                        },
                         child: Row(
                           children: [
                             Icon(Icons.arrow_upward_outlined,
                                 color: Colors.black,
                                 size: 32,
-                                semanticLabel: 'Upvote'),
-                            Text('Upvote')
+                                semanticLabel:
+                                    post.upvoted ? 'Remove Upvote' : 'Upvote'),
+                            Text(post.upvoted ? 'Remove Upvote' : 'Upvote')
                           ],
                         )))
               ]))
+            },
+        (answer) => {
+              retVal = Card(
+                  child: Column(
+                children: [
+                  ListTile(
+                      leading: Icon(Icons.star_outline,
+                          color: Colors.black,
+                          size: 32,
+                          semanticLabel: 'Answer'),
+                      title: Text(answerTitle(answer)),
+                      subtitle: Text(answer.bodyMarkdown)),
+                  Container(
+                      width: 100,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            upvote(answer);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.arrow_upward_outlined,
+                                  color: Colors.black,
+                                  size: 32,
+                                  semanticLabel: answer.upvoted
+                                      ? 'Remove Upvote'
+                                      : 'Upvote'),
+                              Text(answer.upvoted ? 'Remove Upvote' : 'Upvote')
+                            ],
+                          )))
+                ],
+              ))
             });
     return retVal;
   }

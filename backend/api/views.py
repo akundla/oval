@@ -67,6 +67,24 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all().order_by('created_date')
     serializer_class = AnswerSerializer
 
+    @action(detail=True, methods=['post'])
+    def upvote(self, request, pk=None):
+        answer = self.get_object()
+        current_class = answer.post.class_in
+        # if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
+        #         raise ValidationError(detail="You cannot upvote this post.")
+        if 'state' in request.data:
+            upvoted = request.data['state'] == True
+            if request.data['state'] and self.request.user not in answer.upvotes.all():
+                    answer.upvotes.add(self.request.user)
+                    answer.save()
+            elif not request.data['state'] and self.request.user in answer.upvotes.all():
+                answer.upvotes.remove(self.request.user)
+                answer.save()
+            return Response({'upvoted': upvoted})
+        else:
+            raise ValidationError(detail="Bad request.")
+
 class PostViewSet(viewsets.ModelViewSet):
     #permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
@@ -95,14 +113,13 @@ class PostViewSet(viewsets.ModelViewSet):
         # if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
         #         raise ValidationError(detail="You cannot upvote this post.")
         if 'state' in request.data:
+            upvoted = request.data['state'] == True
             if request.data['state'] and self.request.user not in post.upvotes.all():
                     post.upvotes.add(self.request.user)
                     post.save()
-                    upvoted = True
             elif not request.data['state'] and self.request.user in post.upvotes.all():
                 post.upvotes.remove(self.request.user)
                 post.save()
-                upvoted = False
             return Response({'upvoted': upvoted})
         else:
             raise ValidationError(detail="Bad request.")
