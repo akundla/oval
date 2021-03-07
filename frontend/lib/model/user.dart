@@ -9,9 +9,9 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      id: json['id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      id: json['pk'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
       email: json['email'],
       isInstructor: json['isInstructor'] == null ? false : json['isInstructor'],
     );
