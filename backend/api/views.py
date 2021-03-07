@@ -11,6 +11,8 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from django.http import HttpResponse, JsonResponse
 from rest_framework.exceptions import ValidationError
+from rest_framework.decorators import action
+
 
 
 # User Routes
@@ -66,6 +68,20 @@ class PostViewSet(viewsets.ModelViewSet):
             queryset = Post.objects.all().order_by('created_date')
 
         return queryset
+
+    @action(detail=True, methods=['post'])
+    def upvote(self, request, pk=None):
+        post = self.get_object()
+        current_class = post.class_in
+        # if (self.request.user not in current_class.enrollees.all()) and (self.request.user.pk != current_class.primary_instructor.pk):
+        #         raise ValidationError(detail="You cannot upvote this post.")
+        if 'state' in request.data:
+            if request.data['state']:
+                post.upvotes.add(self.request.user)
+                post.save()
+            return Response({'upvoted': request.data['state']})
+        else:
+            raise ValidationError(detail="Bad request.")
 
 # Filters
 # Paginated results per class
