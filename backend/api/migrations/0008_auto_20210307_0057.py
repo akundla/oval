@@ -22,9 +22,4 @@ class Migration(migrations.Migration):
             old_name='user_id',
             new_name='user',
         ),
-        migrations.AlterField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='posts_authored', to=settings.AUTH_USER_MODEL),
-        ),
     ]
