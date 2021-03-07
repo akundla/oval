@@ -7,6 +7,7 @@ class Post {
   final User author;
   final String bodyMarkdown;
   final DateTime created;
+  final bool answerable;
   bool unread;
   bool upvoted;
   int upvotes;
@@ -18,6 +19,7 @@ class Post {
       this.author,
       this.bodyMarkdown,
       this.created,
+      this.answerable,
       this.unread,
       this.upvoted,
       this.upvotes,
@@ -33,6 +35,7 @@ class Post {
       author: User.fromJson(json['author']),
       bodyMarkdown: json['body'],
       created: DateTime.parse(json['created_date']),
+      answerable: json['answerable'],
       unread: !json['user_viewed'],
       upvoted: json['user_upvoted'],
       upvotes: json['upvote_count'],
