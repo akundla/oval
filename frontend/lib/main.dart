@@ -49,6 +49,7 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> {
+  bool force_signout = false;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -57,13 +58,27 @@ class _PageState extends State<Page> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: MainView(),
-    );
+    final sc = Scaffold(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+          actions: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  setState(() {
+                    force_signout = true;
+                  });
+                },
+              ),
+            )
+          ],
+        ),
+        body: MainView(force_signout));
+    force_signout = false;
+    return sc;
   }
 }
