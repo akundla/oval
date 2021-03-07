@@ -80,6 +80,11 @@ class QuickPostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ['title', 'body']
 
+class QuickAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['body']
+
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post

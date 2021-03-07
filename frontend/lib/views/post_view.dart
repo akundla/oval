@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/post_content_view.dart';
+import 'package:frontend/views/new_answer_view.dart';
 
 import '../model/post.dart';
 import '../model/answer.dart';
@@ -38,16 +39,24 @@ class _PostState extends State<PostView> {
 
   Widget createContent(BuildContext context) {
     return ListView.builder(
-      itemCount: 1 + widget.post.answers.length,
+      itemCount: 2 + widget.post.answers.length,
       itemBuilder: (context, index) {
         if (index == 0) {
           return PostContentView(Left(widget.post), upvotePost);
+        } else if (index == 1 + widget.post.answers.length) {
+          return NewAnswerView(widget.post, null, newAnswer);
         } else {
           return PostContentView(
               Right(widget.post.answers[index - 1]), upvotePost);
         }
       },
     );
+  }
+
+  void newAnswer(Answer a) {
+    setState(() {
+      widget.post.answers.add(a);
+    });
   }
 
   void upvotePost(dynamic post) async {
