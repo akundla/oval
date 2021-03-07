@@ -46,14 +46,6 @@ class Comment(models.Model):
     upvotes = models.ManyToManyField(User, related_name="comments_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments_authored")
 
-class Answer(models.Model):
-    created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
-    body = models.TextField()
-    upvotes = models.ManyToManyField(User, related_name="answers_upvoted", blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="answers_authored")
-    comments = models.ManyToManyField(Comment, blank=True)
-
 class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -66,7 +58,15 @@ class Post(models.Model):
     upvotes = models.ManyToManyField(User, related_name="posts_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts_authored")
     comments = models.ManyToManyField(Comment, blank=True)
-    answers = models.ManyToManyField(Answer, blank=True)
+
+class Answer(models.Model):
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    body = models.TextField()
+    upvotes = models.ManyToManyField(User, related_name="answers_upvoted", blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="answers_authored")
+    comments = models.ManyToManyField(Comment, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="answers_post", default=6)
 
 
 
