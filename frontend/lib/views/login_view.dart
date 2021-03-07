@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   String _firstName = "";
   String _lastName = "";
   bool loading = false;
+  String error = null;
 
   FormType _form = FormType
       .login; // our default setting is to login, and we should switch to creating an account when the user chooses to
@@ -88,10 +89,16 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
         padding: EdgeInsets.all(16.0),
         child: new Column(
-          children: <Widget>[
-            _buildTextFields(),
-            _buildButtons(),
-          ],
+          children: error != null
+              ? <Widget>[
+                  Text(error),
+                  _buildTextFields(),
+                  _buildButtons(),
+                ]
+              : <Widget>[
+                  _buildTextFields(),
+                  _buildButtons(),
+                ],
         ));
   }
 
@@ -195,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
     print('The user wants to login with $_email and $_password');
 
     final response = await http.post(
-      Uri.http(env['API_HOST'], 'GetAuthToken'),
+      Uri.http(env['API_HOST'], 'api-token-auth/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -216,7 +223,10 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load post');
+      setState(() {
+        loading = false;
+        error = "Invalid credentials.";
+      });
     }
   }
 
