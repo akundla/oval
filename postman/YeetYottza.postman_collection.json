@@ -283,6 +283,56 @@
 			"response": []
 		},
 		{
+			"name": "ListAnswers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}answer/",
+					"host": [
+						"{{baseurl}}answer"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAnswer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"The Spanish Habsburg's theory of wealth was nonsense, and the saturation of the silver market proves this. Spain's economic model is a demonstrable failure. Gold and silver are not equivalent to wealth. One cannot feed his child a loaf of silver.\",\r\n    \"upvotes\": [],\r\n    \"author\": 9,\r\n    \"comments\": [],\r\n    \"post\": 6\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}answer/",
+					"host": [
+						"{{baseurl}}answer"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "ListPosts",
 			"request": {
 				"method": "GET",
@@ -311,6 +361,35 @@
 			"response": []
 		},
 		{
+			"name": "GetPost",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}posts/6/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CreatePost",
 			"request": {
 				"method": "POST",
@@ -328,7 +407,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"How can wealth be infinite?\",\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane?\",\r\n    \"answerable\": true,\r\n    \"tags\": [],\r\n    \"upvotes\": [],\r\n    \"author\": 7,\r\n    \"comments\": [],\r\n    \"answers\": []\r\n}"
+					"raw": "{\r\n    \"title\": \"How can wealth be infinite?\",\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane?\",\r\n    \"answerable\": true,\r\n    \"tags\": [],\r\n    \"upvotes\": [],\r\n    \"author\": 12,\r\n    \"comments\": [],\r\n    \"answers\": [],\r\n    \"class_in\": 5,\r\n    \"views\": []\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}posts/",
@@ -433,11 +512,15 @@
 		},
 		{
 			"key": "montesquieu_info_page",
-			"value": "# Republics, Monarchies, and Despotic States: A Comparison\\nBaron de Montesquieu teaches a masterclass leading to the formation of the world's oldest democracy.\\n### Notes:\\n- Homeworks due every Friday, in French only. Grammar is graded. "
+			"value": "# Republics, Monarchies, and Despotic States: A Comparison\\nBaron de Montesquieu teaches a masterclass leading to the formation of the..."
 		},
 		{
 			"key": "montesquieu_user_id",
 			"value": "14"
+		},
+		{
+			"key": "auth_token",
+			"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9"
 		}
 	]
 }
