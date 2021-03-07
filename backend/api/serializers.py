@@ -67,9 +67,9 @@ class CurrentUserAction(serializers.Serializer):
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvote_count', 'user_upvoted', 'author', 'comments', 'post']
+        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvote_count', 'user_upvoted', 'author', 'author_info', 'comments', 'post']
 
-    author = UserSerializer(read_only=True)
+    author_info = UserSerializer(read_only=True, source='author')
     upvote_count = serializers.IntegerField(
         source='upvotes.count', 
         read_only=True
