@@ -66,13 +66,13 @@ class CurrentUserAction(serializers.Serializer):
             user = request.user
         
         if user is not None:
-            return user.id in upvotes.all()
+            return user in upvotes.all()
         return str("hi")
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'author', 'comments', 'class_in', 'upvote_count', 'user_upvoted', 'user_viewed']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'author', 'comments', 'class_in', 'upvote_count', 'user_upvoted', 'user_viewed', 'answers_post']
     
     user_upvoted = CurrentUserAction(read_only=True, source='upvotes')
     user_viewed = CurrentUserAction(read_only=True, source='views')
@@ -80,6 +80,7 @@ class PostSerializer(serializers.ModelSerializer):
         source='upvotes.count', 
         read_only=True
     )
+    answers_post = AnswerSerializer(read_only=True, many=True)
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
         self.fields['class_in'] = ClassSerializer(read_only=True)
