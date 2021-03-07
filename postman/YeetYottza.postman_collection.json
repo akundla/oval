@@ -159,6 +159,74 @@
 			"response": []
 		},
 		{
+			"name": "EnrollUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\": true,\r\n    \"role_id\": 3\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}class/5/enroll/",
+					"host": [
+						"{{baseurl}}class"
+					],
+					"path": [
+						"5",
+						"enroll",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpvotePost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}posts/6/upvote/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"6",
+						"upvote",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "UpdateClass",
 			"request": {
 				"method": "POST",
@@ -390,6 +458,39 @@
 			"response": []
 		},
 		{
+			"name": "UpdatePost",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane? Edit: Is he merely in the pay of the Spanish?\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}posts/6/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"6",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CreatePost",
 			"request": {
 				"method": "POST",
@@ -458,7 +559,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
+					"raw": "{\r\n    \"username\": \"adambricelis@gmail.com\",\r\n    \"password\": \"ILoveAndriana\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}api-token-auth/",
@@ -520,7 +621,7 @@
 		},
 		{
 			"key": "auth_token",
-			"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9"
+			"value": "Token a6d202425d76234323fd716c1e5f99826e605536"
 		}
 	]
 }

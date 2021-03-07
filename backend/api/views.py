@@ -32,6 +32,25 @@ class ClassViewSet(viewsets.ModelViewSet):
     queryset = Class.objects.all().order_by('name')
     serializer_class = ClassSerializer
 
+    @action(detail=True, methods=['post'])
+    # pk is the class primary key, the class id
+    def enroll(self, request, pk=None):
+        # Both of these lines ull the correct data
+        currentClass = self.get_object()
+        user_id = self.request.user.pk
+
+        if ('state' in request.data) and ('role_id' in request.data):
+            if request.data['state']:
+                # If this is going to fail let it fail here
+                role_id = int(request.data['role_id'])
+                role = Role.objects.get(pk=role_id)
+
+                enrollment = Enrolled(user=self.request.user, enrolled_class=currentClass, role=role, tag=None)
+                enrollment.save()
+            return Response({'enrolled': request.data['state']})
+        else:
+            raise ValidationError(detail="Bad request.")
+
 class TermViewSet(viewsets.ModelViewSet):
     queryset = Term.objects.all().order_by('code')
     serializer_class = TermSerializer
