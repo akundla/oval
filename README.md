@@ -1,4 +1,4 @@
-# yeetyottza
+# oval
 
 Free classroom-oriented instructor-moderated question and answer forum. Inspired by [Piazza](https://piazza.com/).
 
@@ -14,7 +14,7 @@ Free classroom-oriented instructor-moderated question and answer forum. Inspired
         1. Change the password: `\password postgres`
             * Remember this, you'll need it later!
         1. Quit psql: `\q`
-    1. Create the YeetYottza database: `sudo -u postgres createdb yeetyottza`
+    1. Create the Oval database: `sudo -u postgres createdb oval`
     1. Change Postgres's authentication mode
         1. Find the configuration file: `sudo -u postgres psql -c "show hba_file;"`
         1. Open the configuration file: `sudo vim [configuration file path]`
