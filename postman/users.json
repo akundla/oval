@@ -1,0 +1,44 @@
+[
+    {
+        "pk": 2,
+        "first_name": "Benjamin",
+        "last_name": "Cardozo",
+        "email": "bcardozo@trade.uk",
+        "password": "TariffsAreBad"
+    },
+    {
+        "pk": 5,
+        "first_name": "Thomas",
+        "last_name": "Jefferson",
+        "email": "tjefferson@us.gov",
+        "password": "NaturalRights"
+    },
+    {
+        "pk": 7,
+        "first_name": "Adam",
+        "last_name": "Lis",
+        "email": "adambricelis@gmail.com",
+        "password": "ILoveAndriana"
+    },
+    {
+        "pk": 3,
+        "first_name": "John",
+        "last_name": "Locke",
+        "email": "jlocke@parliament.uk",
+        "password": "LifeLibertyAndProperty"
+    },
+    {
+        "pk": 4,
+        "first_name": "Baron",
+        "last_name": "Montesquieu",
+        "email": "montesquieu@mail.fr",
+        "password": "PrincesAndTyrants"
+    },
+    {
+        "pk": 1,
+        "first_name": "Adam",
+        "last_name": "Smith",
+        "email": "asmith@capitalism.com",
+        "password": "TheWealthOfNations"
+    }
+]

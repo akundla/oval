@@ -92,12 +92,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseurl}}users/11/",
+					"raw": "{{baseurl}}users/2/",
 					"host": [
 						"{{baseurl}}users"
 					],
 					"path": [
-						"11",
+						"2",
 						""
 					]
 				}
@@ -117,7 +117,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"Alek\",\r\n    \"last_name\": \"Kundla\",\r\n    \"email\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
+					"raw": "{\r\n    \"first_name\": \"Adam\",\r\n    \"last_name\": \"Smith\",\r\n    \"email\": \"asmith@capitalism.com\",\r\n    \"password\": \"TheWealthOfNations\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}users/",
@@ -144,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Republics, Monarchies, and Despotic States: A Comparison\",\r\n    \"description\": \"An exploration on the nature and aims of the three broad historical classes of governments\",\r\n    \"information_page\": \"{{montesquieu_info_page}}\",\r\n    \"enrolles\": [],\r\n    \"primary_instructor\": 4\r\n}"
+					"raw": "{\r\n    \"name\": \"Free Trade\",\r\n    \"description\": \"Deep Dive into the theories of absolute and comparative advantage and why barriers on trade, even unilateral ones, are suboptimal\",\r\n    \"information_page\": \"Discussions due at 11:59 PM GMT every night\",\r\n    \"enrollees\": [],\r\n    \"primary_instructor\": 10\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}class/",
@@ -283,7 +283,7 @@
 			"response": []
 		},
 		{
-			"name": "GetPosts",
+			"name": "ListPosts",
 			"request": {
 				"method": "GET",
 				"header": [
