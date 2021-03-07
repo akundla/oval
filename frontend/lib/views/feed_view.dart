@@ -35,20 +35,29 @@ class _FeedState extends State<FeedView> {
             child: ListTile(
                 title: Text('${posts[index].title}'),
                 subtitle: Text('${posts[index].bodyMarkdown}', maxLines: 3),
-                trailing: Column(children: [
-                  Text(DateFormat.jm().format(posts[index].created).toString()),
-                  SizedBox(height: 8),
-                  posts[index].unread ? Icon(Icons.circle, color: Colors.blue, size: 16, semanticLabel: 'Unread') : SizedBox.shrink(),
-                ],),
+                trailing: Column(
+                  children: [
+                    Text(DateFormat.jm()
+                        .format(posts[index].created)
+                        .toString()),
+                    SizedBox(height: 8),
+                    posts[index].unread
+                        ? Icon(Icons.circle,
+                            color: Colors.blue,
+                            size: 16,
+                            semanticLabel: 'Unread')
+                        : SizedBox.shrink(),
+                  ],
+                ),
                 onTap: () {
                   currentlyViewing = posts[index];
                   if (MediaQuery.of(context).size.width > MOBILE_BREAKPOINT) {
-                      setState(() {
-                        if (currentlyViewing.unread) {
-                          // TODO: mark post as read via API
-                            currentlyViewing.unread = false;
-                        }
-                      });
+                    setState(() {
+                      if (currentlyViewing.unread) {
+                        // TODO: mark post as read via API
+                        currentlyViewing.unread = false;
+                      }
+                    });
                   } else {
                     Navigator.push(
                       context,
