@@ -81,7 +81,12 @@ class AnswerViewSet(viewsets.ModelViewSet):
             elif not request.data['state'] and self.request.user in answer.upvotes.all():
                 answer.upvotes.remove(self.request.user)
                 answer.save()
-            return Response({'upvoted': upvoted})
+            return Response(
+                {
+                    'upvoted': upvoted,
+                    'upvotes': len(post.upvotes.all())
+                }
+            )
         else:
             raise ValidationError(detail="Bad request.")
 
@@ -120,7 +125,12 @@ class PostViewSet(viewsets.ModelViewSet):
             elif not request.data['state'] and self.request.user in post.upvotes.all():
                 post.upvotes.remove(self.request.user)
                 post.save()
-            return Response({'upvoted': upvoted})
+            return Response(
+                {
+                    'upvoted': upvoted,
+                    'upvotes': len(post.upvotes.all())
+                }
+            )
         else:
             raise ValidationError(detail="Bad request.")
     
