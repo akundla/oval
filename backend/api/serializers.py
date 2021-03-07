@@ -80,6 +80,7 @@ class PostSerializer(serializers.ModelSerializer):
         source='upvotes.count', 
         read_only=True
     )
+    answers_post = AnswerSerializer(read_only=True, many=True)
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
         self.fields['class_in'] = ClassSerializer(read_only=True)
