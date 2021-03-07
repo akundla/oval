@@ -5,6 +5,8 @@ import '../model/answer.dart';
 
 import 'package:dartz/dartz.dart';
 
+final double UPVOTE_BUTTON_WIDTH = 125;
+
 typedef UpvoteFunc = void Function(dynamic p);
 
 class PostContentView extends StatelessWidget {
@@ -30,23 +32,9 @@ class PostContentView extends StatelessWidget {
                             size: 32,
                             semanticLabel: 'Note'),
                     title: Text(post.title),
-                    subtitle: Text(post.bodyMarkdown)),
-                Container(
-                    width: 100,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          upvote(post);
-                        },
-                        child: Row(
-                          children: [
-                            Icon(Icons.arrow_upward_outlined,
-                                color: Colors.black,
-                                size: 32,
-                                semanticLabel:
-                                    post.upvoted ? 'Remove Upvote' : 'Upvote'),
-                            Text(post.upvoted ? 'Remove Upvote' : 'Upvote')
-                          ],
-                        )))
+                    subtitle: Text(post.bodyMarkdown),
+                    trailing: Container(
+                        width: UPVOTE_BUTTON_WIDTH, child: upvoteButton(post)))
               ]))
             },
         (answer) => {
@@ -58,37 +46,34 @@ class PostContentView extends StatelessWidget {
                           color: Colors.black,
                           size: 32,
                           semanticLabel: 'Answer'),
-                      title: Text(answerTitle(answer)),
-                      subtitle: Text(answer.bodyMarkdown)),
-                  Container(
-                      width: 100,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            upvote(answer);
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.arrow_upward_outlined,
-                                  color: Colors.black,
-                                  size: 32,
-                                  semanticLabel: answer.upvoted
-                                      ? 'Remove Upvote'
-                                      : 'Upvote'),
-                              Text(answer.upvoted ? 'Remove Upvote' : 'Upvote')
-                            ],
-                          )))
+                      title: Text(answer.author.firstName +
+                          ' ' +
+                          answer.author.lastName +
+                          "'s Answer"),
+                      subtitle: Text(answer.bodyMarkdown),
+                      trailing: Container(
+                          width: UPVOTE_BUTTON_WIDTH,
+                          child: upvoteButton(answer)))
                 ],
               ))
             });
     return retVal;
   }
 
-  static String answerTitle(Answer answer) {
-    return answer.author.firstName +
-        ' ' +
-        answer.author.lastName +
-        "'s Answer has " +
-        answer.upvotes.toString() +
-        ' upvotes';
+  ElevatedButton upvoteButton(dynamic upvotable) {
+    return ElevatedButton(
+        onPressed: () {
+          upvote(upvotable);
+        },
+        child: Row(
+          children: [
+            Icon(upvotable.upvoted ? Icons.arrow_downward : Icons.arrow_upward,
+                color: Colors.white,
+                size: 32,
+                semanticLabel:
+                    upvotable.upvoted ? 'Downward arrow' : 'Upward arrow'),
+            Text(' ' + upvotable.upvotes.toString() + ' Upvotes')
+          ],
+        ));
   }
 }

@@ -88,12 +88,22 @@ class _FeedState extends State<FeedView> {
         Expanded(
             flex: 3,
             child: new Column(children: [
-              MaterialButton(
-                child: Text("Add Post"),
-                onPressed: () {
-                  makeNewPost();
-                },
-              ),
+              SizedBox(height: 15),
+              Container(
+                  width: 115,
+                  child: ElevatedButton(
+                    child: Row(children: [
+                      Icon(Icons.add,
+                          color: Colors.white,
+                          size: 32,
+                          semanticLabel: 'Plus sign'),
+                      Text(" Add Post"),
+                    ]),
+                    onPressed: () {
+                      makeNewPost();
+                    },
+                  )),
+              SizedBox(height: 12),
               Expanded(child: lvb)
             ])),
         isLargeScreen
