@@ -142,6 +142,23 @@ class PostViewSet(viewsets.ModelViewSet):
         else:
             raise ValidationError(detail="Bad request.")
 
+    @action(detail=True, methods=['post'])
+    def answer(self, request, pk=None):
+        post = self.get_object()
+        ps = QuickAnswerSerializer(data=request.data)
+        if ps.is_valid() and self.request.user is not None:
+            p = Answer()
+            p.body = ps['body'].value
+            p.post = post
+            p.author = self.request.user
+            p.save()
+            return Response(AnswerSerializer(context={'request': request}).to_representation(p))
+        # if ('body' in request.data and 'title' in request.data):
+        #     p = Post()
+        #     p.title = request.data['title']
+
+        raise ValidationError(detail="Bad request.")
+
     def create(self, request):
         ps = QuickPostSerializer(data=request.data)
         if ps.is_valid() and self.request.user is not None:
