@@ -75,6 +75,10 @@ class AnswerSerializer(serializers.ModelSerializer):
         read_only=True
     )
     user_upvoted = CurrentUserAction(read_only=True, source='upvotes')
+class QuickPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['title', 'body']
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
