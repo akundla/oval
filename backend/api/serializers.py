@@ -57,19 +57,15 @@ class CommentSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author', 'comments']
+        fields = ['pk', 'created_date', 'modified_date', 'body', 'upvotes', 'author', 'comments', 'post']
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers', 'class_in', 'views']
+        fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'class_in', 'views']
     
     def to_representation(self, instance):
         self.fields['author'] = UserSerializer(read_only=True)
         self.fields['class_in'] = ClassSerializer(read_only=True)
         return super(PostSerializer, self).to_representation(instance)
 
-class UserCreationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email', 'password']
