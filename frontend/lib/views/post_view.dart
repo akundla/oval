@@ -42,12 +42,11 @@ class _PostState extends State<PostView> {
       itemCount: 2 + widget.post.answers.length,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return PostContentView(Left(widget.post), upvotePost);
+          return PostContentView(Left(widget.post), upvote);
         } else if (index == 1 + widget.post.answers.length) {
           return NewAnswerView(widget.post, null, newAnswer);
         } else {
-          return PostContentView(
-              Right(widget.post.answers[index - 1]), upvotePost);
+          return PostContentView(Right(widget.post.answers[index - 1]), upvote);
         }
       },
     );
@@ -59,22 +58,24 @@ class _PostState extends State<PostView> {
     });
   }
 
-  void upvotePost(dynamic post) async {
-    final type = post.runtimeType == Post ? 'posts' : 'answer';
+  void upvote(dynamic upvotable) async {
+    final type = upvotable.runtimeType == Post ? 'posts' : 'answer';
     final response = await http.post(
-      Uri.http(env['API_HOST'], '$type/' + post.id.toString() + '/upvote/'),
+      Uri.http(
+          env['API_HOST'], '$type/' + upvotable.id.toString() + '/upvote/'),
       headers: {
         HttpHeaders.authorizationHeader: "Token " + authToken.value,
         HttpHeaders.contentTypeHeader: "application/json"
       },
-      body: jsonEncode(<String, dynamic>{'state': !post.upvoted}),
+      body: jsonEncode(<String, dynamic>{'state': !upvotable.upvoted}),
     );
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       setState(() {
-        post.upvoted = jsonDecode(response.body)['upvoted'];
+        upvotable.upvoted = jsonDecode(response.body)['upvoted'];
+        upvotable.upvotes = jsonDecode(response.body)['upvotes'];
       });
     } else {
       // If the server did not return a 200 OK response,

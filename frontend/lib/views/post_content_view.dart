@@ -68,7 +68,7 @@ class PostContentView extends StatelessWidget {
         },
         child: Row(
           children: [
-            Icon(upvotable.upvoted ? Icons.arrow_downward : Icons.arrow_upward,
+            Icon(upvotable.upvoted ? Icons.undo : Icons.arrow_upward,
                 color: Colors.white,
                 size: 32,
                 semanticLabel:
