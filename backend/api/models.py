@@ -20,8 +20,8 @@ class Role(models.Model):
     name = models.CharField(max_length=255)
 
 class Enrolled(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    class_id = models.ForeignKey("Class", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    enrolled_class = models.ForeignKey("Class", on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
     tag = models.CharField(max_length=255)
 
@@ -30,7 +30,7 @@ class Class(models.Model):
     description = models.TextField()
     information_page = models.TextField()
     enrolles = models.ManyToManyField(User, through=Enrolled, related_name="classes_enrolled")
-    primary_instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="primary_instructor_in_class")
+    primary_instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="primary_instructor_in_class", default = 1)
 
 class Term(models.Model):
     full_name = models.CharField(max_length=255)
@@ -43,16 +43,16 @@ class Comment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     body = models.TextField()
-    upvotes = models.ManyToManyField(User, related_name="comments_upvoted")
+    upvotes = models.ManyToManyField(User, related_name="comments_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments_authored")
 
 class Answer(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     body = models.TextField()
-    upvotes = models.ManyToManyField(User, related_name="answers_upvoted")
+    upvotes = models.ManyToManyField(User, related_name="answers_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="answers_authored")
-    comments = models.ManyToManyField(Comment)
+    comments = models.ManyToManyField(Comment, blank=True)
 
 class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
@@ -60,11 +60,11 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
     answerable = models.BooleanField()
-    tags = models.ManyToManyField(Tag)
-    upvotes = models.ManyToManyField(User, related_name="posts_upvoted")
+    tags = models.ManyToManyField(Tag, blank=True)
+    upvotes = models.ManyToManyField(User, related_name="posts_upvoted", blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts_authored")
-    comments = models.ManyToManyField(Comment)
-    answers = models.ManyToManyField(Answer)
+    comments = models.ManyToManyField(Comment, blank=True)
+    answers = models.ManyToManyField(Answer, blank=True)
 
 
 

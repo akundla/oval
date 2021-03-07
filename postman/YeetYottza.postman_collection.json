@@ -117,7 +117,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"Baron\",\r\n    \"last_name\": \"Montesquieu\",\r\n    \"email\": \"montesquieu@lemail.com\",\r\n    \"password\": \"TheSpiritOfTheLaw\"\r\n}"
+					"raw": "{\r\n    \"first_name\": \"Alek\",\r\n    \"last_name\": \"Kundla\",\r\n    \"email\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}users/",
@@ -144,7 +144,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Republics, Monarchies, and Despotic States: A Comparison\",\r\n    \"description\": \"An exploration on the nature and aims of the three broad historical classes of governments\",\r\n    \"information_page\": \"{{montesquieu_info_page}}\",\r\n    \"primary_instructor_id\": 14\r\n}"
+					"raw": "{\r\n    \"name\": \"Republics, Monarchies, and Despotic States: A Comparison\",\r\n    \"description\": \"An exploration on the nature and aims of the three broad historical classes of governments\",\r\n    \"information_page\": \"{{montesquieu_info_page}}\",\r\n    \"enrolles\": [],\r\n    \"primary_instructor\": 4\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}class/",
@@ -152,6 +152,80 @@
 						"{{baseurl}}class"
 					],
 					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateClass",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Republics, Monarchies, and Despotic States: A Comparison\",\r\n    \"description\": \"An exploration on the nature and aims of the three broad historical classes of governments\",\r\n    \"information_page\": \"{{montesquieu_info_page}}\",\r\n    \"enrolles\": [],\r\n    \"primary_instructor\": 14\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}class/",
+					"host": [
+						"{{baseurl}}class"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListClasses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}class/",
+					"host": [
+						"{{baseurl}}class"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteClass",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}class/2/",
+					"host": [
+						"{{baseurl}}class"
+					],
+					"path": [
+						"2",
 						""
 					]
 				}
@@ -171,7 +245,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Primary Instructor\"\r\n}"
+					"raw": "{\r\n    \"name\": \"Student\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}roles/",
@@ -209,6 +283,66 @@
 			"response": []
 		},
 		{
+			"name": "GetPosts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}posts/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"How can wealth be infinite?\",\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane?\",\r\n    \"answerable\": true,\r\n    \"tags\": [],\r\n    \"upvotes\": [],\r\n    \"author\": 7,\r\n    \"comments\": [],\r\n    \"answers\": []\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}posts/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "DeleteRole",
 			"request": {
 				"method": "DELETE",
@@ -226,6 +360,33 @@
 					],
 					"path": [
 						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAuthToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}api-token-auth/",
+					"host": [
+						"{{baseurl}}api-token-auth"
+					],
+					"path": [
 						""
 					]
 				}
