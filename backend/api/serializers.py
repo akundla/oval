@@ -23,8 +23,12 @@ class EnrolledSerializer(serializers.ModelSerializer):
 class ClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = Class
-        fields = ['pk', 'name', 'description', 'information_page', 'enrolles', 'primary_instructor']
+        fields = ('pk', 'name', 'description', 'information_page', 'enrolles', 'primary_instructor')
         depth = 1
+
+    def to_representation(self, instance):
+        self.fields['primary_instructor'] = UserSerializer(read_only=True)
+        return super(ClassSerializer, self).to_representation(instance)
 
 class TermSerializer(serializers.ModelSerializer):
     class Meta:
