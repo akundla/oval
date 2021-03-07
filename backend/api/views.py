@@ -106,6 +106,24 @@ class PostViewSet(viewsets.ModelViewSet):
             return Response({'upvoted': upvoted})
         else:
             raise ValidationError(detail="Bad request.")
+    
+    @action(detail=True, methods=['post'])
+    def view(self, request, pk=None):
+        post = self.get_object()
+        current_class = post.class_in
+
+        if 'state' in request.data:
+            if request.data['state']:
+                    post.views.add(self.request.user)
+                    post.save()
+                    viewed = True
+            elif not request.data['state']:
+                post.views.remove(self.request.user)
+                post.save()
+                viewed = False
+            return Response({'viewed': viewed})
+        else:
+            raise ValidationError(detail="Bad request.")
 
 # Filters
 # Paginated results per class
