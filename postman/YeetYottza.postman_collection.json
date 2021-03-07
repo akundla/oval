@@ -117,7 +117,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"Adam\",\r\n    \"last_name\": \"Smith\",\r\n    \"email\": \"asmith@capitalism.com\",\r\n    \"password\": \"TheWealthOfNations\"\r\n}"
+					"raw": "{\r\n    \"first_name\": \"Donald\",\r\n    \"last_name\": \"Trump\",\r\n    \"email\": \"thedonald@trump.org\",\r\n    \"password\": \"yuge\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}users/",
@@ -420,7 +420,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"body\": \"You'll have a new one over in the American colonies in about 9 years, and in France in 19 years...\",\r\n    \"upvotes\": [],\r\n    \"author\": 12,\r\n    \"comments\": [],\r\n    \"post\": 16\r\n}"
+					"raw": "{\r\n    \"body\": \"No. Retaliatory tariffs are a tax imposed by the government on its own civillian populace. Removing barriers to trade lowes the cost of goods and increases the standard of living for a nation's citizens even when done unilaterally, in the face of tariffs imposed by another contry on your own country's exports. \",\r\n    \"upvotes\": [],\r\n    \"author\": 15,\r\n    \"comments\": [],\r\n    \"post\": 17\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}answer/",
@@ -428,6 +428,62 @@
 						"{{baseurl}}answer"
 					],
 					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EditAnswer",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"When a country (USA) is losing many billions of dollars on trade with virtually every country it does business with, trade wars are good, and easy to win! When we are down $100 billion with a certain country and they get cute, don't trade anymore - we win big. It's easy!\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}answer/12/",
+					"host": [
+						"{{baseurl}}answer"
+					],
+					"path": [
+						"12",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAnswer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"You'll have a new one over in the American colonies in about 9 years, and in France in 19 years...\",\r\n    \"upvotes\": [],\r\n    \"author\": 12,\r\n    \"comments\": [],\r\n    \"post\": 16\r\n}"
+				},
+				"url": {
+					"raw": "{{baseurl}}answer/11/",
+					"host": [
+						"{{baseurl}}answer"
+					],
+					"path": [
+						"11",
 						""
 					]
 				}
@@ -508,12 +564,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseurl}}posts/3/",
+					"raw": "{{baseurl}}posts/15/",
 					"host": [
 						"{{baseurl}}posts"
 					],
 					"path": [
-						"3",
+						"15",
 						""
 					]
 				}
@@ -622,7 +678,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"alekkundla@gmail.com\",\r\n    \"password\": \"password123\"\r\n}"
+					"raw": "{\r\n    \"username\": \"thedonald@trump.org\",\r\n    \"password\": \"yuge\"\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}api-token-auth/",
@@ -684,7 +740,7 @@
 		},
 		{
 			"key": "auth_token",
-			"value": "Token 8e9abf63c1eec6eaebdf1cbd7744bc262bf39ac9"
+			"value": "Token 5a2721a0add97ca9113a7d42f5e013fb4934e2d9"
 		}
 	]
 }
