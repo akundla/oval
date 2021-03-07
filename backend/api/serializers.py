@@ -5,7 +5,12 @@ from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Pos
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+<<<<<<< HEAD
+        fields = ['pk', 'first_name', 'last_name', 'email']
+        depth = 1
+=======
         fields = ['pk', 'first_name', 'last_name', 'email', 'password']
+>>>>>>> 9d3e88080428b3c5b9121af89c432cbc23107e43
 
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,6 +54,12 @@ class AnswerSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
+        fields = ['created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
+
+class UserCreationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'password']
         fields = ['pk', 'created_date', 'modified_date', 'title', 'body', 'answerable', 'tags', 'upvotes', 'author', 'comments', 'answers']
     
     def to_representation(self, instance):

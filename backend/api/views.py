@@ -2,6 +2,11 @@
 from .serializers import UserSerializer, RoleSerializer, EnrolledSerializer, ClassSerializer, TermSerializer, TagSerializer, CommentSerializer, AnswerSerializer, PostSerializer
 from rest_framework import viewsets, mixins
 from .models import User, Role, Enrolled, Class, Term, Tag, Comment, Answer, Post
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # User Routes
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,8 +42,14 @@ class AnswerViewSet(viewsets.ModelViewSet):
     serializer_class = AnswerSerializer
 
 class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+
     queryset = Post.objects.all().order_by('created_date')
     serializer_class = PostSerializer
+
+# class CreateUserViewSet(APIView):
+    
+#     def post(self, request, format)
 
 # Needed Routes
 # Sign Up

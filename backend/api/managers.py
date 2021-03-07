@@ -12,14 +12,12 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Email must be set'))
 
         email = self.normalize_email(email)
-        first_name = self.lower(first_name)
-        last_name = self.lower(last_name)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email=email, first_name=first_name, last_name=last_name, **extra_fields)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, first_name, last_name, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -28,4 +26,4 @@ class CustomUserManager(BaseUserManager):
             raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
             raise ValueError(_('Superuser must have is_superuser=True.'))
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(first_name, last_name, email, password, **extra_fields)
