@@ -30,7 +30,7 @@ class Class(models.Model):
     description = models.TextField()
     information_page = models.TextField()
     enrolles = models.ManyToManyField(User, through=Enrolled, related_name="classes_enrolled")
-    primary_instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="primary_instructor_in_class")
+    primary_instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="primary_instructor_in_class", default = 1)
 
 class Term(models.Model):
     full_name = models.CharField(max_length=255)
