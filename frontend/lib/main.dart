@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/feed_view.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+import 'package:frontend/views/main_view.dart';
 
 void main() async {
   await DotEnv.load();
@@ -63,7 +64,7 @@ class _PageState extends State<Page> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: FeedView(),
+      body: MainView(),
     );
   }
 }
