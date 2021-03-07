@@ -7,6 +7,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../model/post.dart';
 import '../singletons/auth_token.dart';
 
+import 'package:flutter_markdown/flutter_markdown.dart';
+
 // Stolen from https://github.com/ahmed-alzahrani/Flutter_Simple_Login/blob/master/lib/main.dart
 class PostEditView extends StatefulWidget {
   PostEditView(this.post);
@@ -53,7 +55,9 @@ class _PostEditViewState extends State<PostEditView> {
     if (questionBodyController.text.isEmpty) {
       questionBody = "";
     } else {
-      questionBody = questionBodyController.text;
+      setState(() {
+        questionBody = questionBodyController.text;
+      });
     }
   }
 
@@ -72,11 +76,17 @@ class _PostEditViewState extends State<PostEditView> {
           child: new TextField(
             controller: questionBodyController,
             decoration: new InputDecoration(labelText: 'Question Body'),
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
           ),
         ),
         new TextButton(
           child: Text("Submit"),
           onPressed: submit,
+        ),
+        new Text("Preview:"),
+        new MarkdownBody(
+          data: questionBody,
         )
       ],
     ));

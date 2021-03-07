@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../model/post.dart';
 import '../model/answer.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:dartz/dartz.dart';
 
@@ -32,7 +33,7 @@ class PostContentView extends StatelessWidget {
                             size: 32,
                             semanticLabel: 'Note'),
                     title: Text(post.title),
-                    subtitle: Text(post.bodyMarkdown),
+                    subtitle: MarkdownBody(data: post.bodyMarkdown),
                     trailing: Container(
                         width: UPVOTE_BUTTON_WIDTH, child: upvoteButton(post)))
               ]))
@@ -50,7 +51,7 @@ class PostContentView extends StatelessWidget {
                           ' ' +
                           answer.author.lastName +
                           "'s Answer"),
-                      subtitle: Text(answer.bodyMarkdown),
+                      subtitle: MarkdownBody(data: answer.bodyMarkdown),
                       trailing: Container(
                           width: UPVOTE_BUTTON_WIDTH,
                           child: upvoteButton(answer)))
