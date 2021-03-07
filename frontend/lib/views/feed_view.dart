@@ -33,6 +33,15 @@ class _FeedState extends State<FeedView> {
       itemBuilder: (context, index) {
         return Card(
             child: ListTile(
+                leading: posts[index].answerable
+                          ? Icon(Icons.question_answer_outlined,
+                              color: Colors.black,
+                              size: 32,
+                              semanticLabel: 'Question')
+                          : Icon(Icons.note_outlined,
+                              color: Colors.black,
+                              size: 32,
+                              semanticLabel: 'Note'),
                 title: Text('${posts[index].title}'),
                 subtitle: Text('${posts[index].bodyMarkdown}', maxLines: 3),
                 trailing: Column(
