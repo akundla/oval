@@ -84,7 +84,7 @@ class AnswerViewSet(viewsets.ModelViewSet):
             return Response(
                 {
                     'upvoted': upvoted,
-                    'upvotes': len(post.upvotes.all())
+                    'upvotes': len(answer.post.upvotes.all())
                 }
             )
         else:
