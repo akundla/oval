@@ -420,7 +420,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"body\": \"The Spanish Habsburg's theory of wealth was nonsense, and the saturation of the silver market proves this. Spain's economic model is a demonstrable failure. Gold and silver are not equivalent to wealth. One cannot feed his child a loaf of silver.\",\r\n    \"upvotes\": [],\r\n    \"author\": 9,\r\n    \"comments\": [],\r\n    \"post\": 6\r\n}"
+					"raw": "{\r\n    \"body\": \"You'll have a new one over in the American colonies in about 9 years, and in France in 19 years...\",\r\n    \"upvotes\": [],\r\n    \"author\": 12,\r\n    \"comments\": [],\r\n    \"post\": 16\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}answer/",
@@ -492,6 +492,35 @@
 			"response": []
 		},
 		{
+			"name": "DeletePost",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{auth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}posts/3/",
+					"host": [
+						"{{baseurl}}posts"
+					],
+					"path": [
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "UpdatePost",
 			"request": {
 				"method": "PATCH",
@@ -542,7 +571,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"How can wealth be infinite?\",\r\n    \"body\": \"Prof. Smith said in his syllabus that he will explore how wealth is infinite, but the Spanish told me that wealth was finite and bounded by the amount of Gold and Silver in the world. The Spanish couldn't be wrong. Is Prof. Smith insane?\",\r\n    \"answerable\": true,\r\n    \"tags\": [],\r\n    \"upvotes\": [],\r\n    \"author\": 12,\r\n    \"comments\": [],\r\n    \"answers\": [],\r\n    \"class_in\": 5,\r\n    \"views\": []\r\n}"
+					"raw": "{\r\n    \"title\": \"Suggestions for Republics to analyze\",\r\n    \"body\": \"Prof. Smith requested that we undertake an analysis of a contemporary republic, but here in 1774 there are no major ones. What should we do?\",\r\n    \"answerable\": true,\r\n    \"tags\": [],\r\n    \"upvotes\": [],\r\n    \"author\": 9,\r\n    \"comments\": [],\r\n    \"answers\": [],\r\n    \"class_in\": 5,\r\n    \"views\": []\r\n}"
 				},
 				"url": {
 					"raw": "{{baseurl}}posts/",
